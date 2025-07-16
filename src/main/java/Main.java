@@ -7,6 +7,7 @@ public class Main {
         OrderMapRepo orderMapRepo = new OrderMapRepo();
         OrderMapRepo orderMapRepo2 = new OrderMapRepo();
 
+        IdService idService = new IdService();
 
         // create products
         ProductRepo productRepo = new ProductRepo();
@@ -25,7 +26,7 @@ public class Main {
         List<String> orderProductsID2 = List.of("1", "2", "9", "8", "10");
         List<String> orderProductsID3 = List.of("6", "7", "8", "9", "10");
 
-        ShopService shopService = new ShopService(productRepo, orderListRepo);
+        ShopService shopService = new ShopService(productRepo, orderListRepo, idService);
 
         try {
             Order order = shopService.addOrder(orderProductsID);
