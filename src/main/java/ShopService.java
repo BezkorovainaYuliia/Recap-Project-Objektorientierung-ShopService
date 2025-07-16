@@ -8,13 +8,14 @@ public class ShopService {
     private OrderRepo orderRepo = new OrderMapRepo();
 
     //edit + Optional
-    public Order addOrder(List<String> productIds) {
+    //edit Exeption
+    public Order addOrder(List<String> productIds) throws NoSuchProductException {
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
             Optional<Product> productToOrder = productRepo.getProductById(productId); //Optional
             if (productToOrder.isEmpty()) { //edit
-                System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                return null;
+                //add throw NoSuchException
+                throw new NoSuchProductException("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
             }
             products.add(productToOrder.get()); //edit
         }

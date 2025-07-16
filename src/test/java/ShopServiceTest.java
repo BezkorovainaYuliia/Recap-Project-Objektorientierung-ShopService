@@ -13,7 +13,12 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1");
 
         //WHEN
-        Order actual = shopService.addOrder(productsIds);
+        Order actual = null;
+        try {
+            actual = shopService.addOrder(productsIds);
+        } catch (NoSuchProductException e) {
+            throw new RuntimeException(e);
+        }
 
         //THEN
         Order expected = new Order("-1", List.of(new Product("1", "Apfel")), Status.PROCESSING);
@@ -28,9 +33,8 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1", "2");
 
         //WHEN
-        Order actual = shopService.addOrder(productsIds);
 
         //THEN
-        assertNull(actual);
+        assertThrows(NoSuchProductException.class, () -> shopService.addOrder(productsIds));
     }
 }
