@@ -1,3 +1,8 @@
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -5,10 +10,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@ToString
+@RequiredArgsConstructor
 public class ShopService {
-    private ProductRepo productRepo = new ProductRepo();
-    private OrderRepo orderRepo = new OrderMapRepo();
+    @NonNull
+    private final ProductRepo productRepo;
+    @NonNull
+    private final OrderRepo orderRepo;
 
+    public ShopService() {
+        productRepo = new ProductRepo();
+        orderRepo = new OrderMapRepo();
+    }
     //edit + Optional
     //edit Exeption
     public Order addOrder(List<String> productIds) throws NoSuchProductException {
