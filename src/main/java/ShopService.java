@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +22,7 @@ public class ShopService {
             products.add(productToOrder.get()); //edit
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, Status.PROCESSING);
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
 
         return orderRepo.addOrder(newOrder);
     }
