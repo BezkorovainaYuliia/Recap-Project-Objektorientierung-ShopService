@@ -13,7 +13,7 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1");
 
         //WHEN
-        Order actual = null;
+        Order actual;
         try {
             actual = shopService.addOrder(productsIds);
         } catch (NoSuchProductException e) {
