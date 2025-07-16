@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +23,7 @@ class ShopServiceTest {
         }
 
         //THEN
-        Order expected = new Order("-1", List.of(new Product("1", "Apfel")), Status.PROCESSING);
+        Order expected = new Order("-1", List.of(new Product("1", "Apfel")), Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
         assertEquals(expected.products(), actual.products());
         assertNotNull(expected.id());
     }
