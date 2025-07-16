@@ -8,7 +8,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @ToString
 @RequiredArgsConstructor
@@ -17,10 +16,13 @@ public class ShopService {
     private final ProductRepo productRepo;
     @NonNull
     private final OrderRepo orderRepo;
+    @NonNull
+    private final IdService idService;
 
     public ShopService() {
         productRepo = new ProductRepo();
         orderRepo = new OrderMapRepo();
+        idService = new IdService();
     }
     //edit + Optional
     //edit Exeption
@@ -35,7 +37,7 @@ public class ShopService {
             products.add(productToOrder.get()); //edit
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        Order newOrder = new Order(idService.generateID(), products, Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
 
         return orderRepo.addOrder(newOrder);
     }

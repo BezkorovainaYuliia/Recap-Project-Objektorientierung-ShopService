@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,10 @@ class OrderListRepoTest {
     void getOrders() {
         //GIVEN
         OrderListRepo repo = new OrderListRepo();
+        ZonedDateTime time = LocalDateTime.now().atZone(ZoneId.systemDefault());
 
         Product product = new Product("1", "Apfel");
-        Order newOrder = new Order("1", List.of(product), Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        Order newOrder = new Order("1", List.of(product), Status.PROCESSING, time);
         repo.addOrder(newOrder);
 
         //WHEN
@@ -24,9 +26,9 @@ class OrderListRepoTest {
         //THEN
         List<Order> expected = new ArrayList<>();
         Product product1 = new Product("1", "Apfel");
-        expected.add(new Order("1", List.of(product1), Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault())));
+        expected.add(new Order("1", List.of(product1), Status.PROCESSING, time));
 
-        assertEquals(actual.size(), expected.size());
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -34,8 +36,10 @@ class OrderListRepoTest {
         //GIVEN
         OrderListRepo repo = new OrderListRepo();
 
+        ZonedDateTime time = LocalDateTime.now().atZone(ZoneId.systemDefault());
+
         Product product = new Product("1", "Apfel");
-        Order newOrder = new Order("1", List.of(product), Status.PROCESSING,LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        Order newOrder = new Order("1", List.of(product), Status.PROCESSING, time);
         repo.addOrder(newOrder);
 
         //WHEN
@@ -43,26 +47,29 @@ class OrderListRepoTest {
 
         //THEN
         Product product1 = new Product("1", "Apfel");
-        Order expected = new Order("1", List.of(product1), Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        Order expected = new Order("1", List.of(product1), Status.PROCESSING, time);
 
-        assertEquals(actual.id(), expected.id());
+        assertEquals(actual, expected);
     }
 
     @Test
     void addOrder() {
         //GIVEN
+        ZonedDateTime time = LocalDateTime.now().atZone(ZoneId.systemDefault());
         OrderListRepo repo = new OrderListRepo();
         Product product = new Product("1", "Apfel");
-        Order newOrder = new Order("1", List.of(product), Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        Order newOrder = new Order("1", List.of(product), Status.PROCESSING, time);
 
         //WHEN
         Order actual = repo.addOrder(newOrder);
 
         //THEN
         Product product1 = new Product("1", "Apfel");
-        Order expected = new Order("1", List.of(product1), Status.PROCESSING, LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        Order expected = new Order("1", List.of(product1), Status.PROCESSING, time);
         assertEquals(actual.id(), expected.id());
         assertEquals(repo.getOrderById("1").products().size(), expected.products().size());
+        assertEquals(actual, expected);
+        assertEquals(repo.getOrderById("1").products(), expected.products());
     }
 
     @Test
