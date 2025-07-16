@@ -1,3 +1,6 @@
+import lombok.Getter;
+
+@Getter
 public enum Status {
     PROCESSING("Processing"),
     IN_DELIVERY("In delivery"),
@@ -5,8 +8,5 @@ public enum Status {
     private final String value;
     Status(String value) {
         this.value = value;
-    }
-    public String getValue() {
-        return value;
     }
 }
