@@ -27,7 +27,7 @@ class ProductRepoTest {
         Optional<Product> actual = repo.getProductById("1");
 
         //THEN
-        Product expected = new Product("1", "Apfel");
+        Optional<Product> expected = Optional.of(new Product("1", "Apfel"));
         assertEquals(actual, expected);
     }
 
@@ -42,8 +42,9 @@ class ProductRepoTest {
 
         //THEN
         Product expected = new Product("2", "Banane");
+        Optional<Product> expected2 = Optional.of(new Product("2", "Banane"));
         assertEquals(actual, expected);
-        assertEquals(repo.getProductById("2"), expected);
+        assertEquals(repo.getProductById("2"), expected2);
     }
 
     @org.junit.jupiter.api.Test
@@ -55,6 +56,6 @@ class ProductRepoTest {
         repo.removeProduct("1");
 
         //THEN
-        assertNull(repo.getProductById("1"));
+        assertEquals(Optional.empty(), repo.getProductById("1"));
     }
 }
