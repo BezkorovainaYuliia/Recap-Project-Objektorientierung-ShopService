@@ -32,7 +32,7 @@ public class Main {
         try {
             Order order = shopService.addOrder(orderProductsID);
         } catch (NoSuchProductException e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             System.out.println("Order is canceled");
         }
 
@@ -40,14 +40,14 @@ public class Main {
         try {
             Order order2 = shopService.addOrder(orderProductsID2);
         } catch (NoSuchProductException e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             System.out.println("Order is canceled");
         }
 
         try {
             Order order3 = shopService.addOrder(orderProductsID2);
         } catch (NoSuchProductException e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             System.out.println("Order is canceled");
         }
 
