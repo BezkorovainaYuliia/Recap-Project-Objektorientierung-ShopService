@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -49,6 +51,12 @@ public class Main {
             System.out.println(e.toString());
             System.out.println("Order is canceled");
         }
+
+        Map<Status, Order> getMap = shopService.getOldestOrderPerStatus();
+        getMap.forEach((status, order) -> {
+            System.out.println(status);
+            System.out.println(order);
+        });
 
     }
 }

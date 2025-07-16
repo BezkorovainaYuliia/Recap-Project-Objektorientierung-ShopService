@@ -1,3 +1,4 @@
+import lombok.Getter;
 import lombok.With;
 
 import java.time.ZonedDateTime;
@@ -9,4 +10,7 @@ public record Order(
         Status status,
         ZonedDateTime zonedDateTime
 ) {
+    public ZonedDateTime timestamp() {
+        return zonedDateTime;
+    }
 }

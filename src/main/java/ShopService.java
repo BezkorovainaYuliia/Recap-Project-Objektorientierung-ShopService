@@ -5,9 +5,8 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @ToString
 @RequiredArgsConstructor
@@ -56,5 +55,14 @@ public class ShopService {
         Order updatOrder = orderRepo.getOrderById(id);
         updatOrder = updatOrder.withStatus(status);
         orderRepo.updateOrder(updatOrder);
+    }
+
+    public Map<Status,Order> getOldestOrderPerStatus() {
+        return orderRepo.getOrders().stream()
+                .collect(Collectors.toMap(
+                        Order::status,
+                        order -> order,
+                        (o1, o2) -> o1.timestamp().isBefore(o2.timestamp()) ? o1 : o2
+                ));
     }
 }
