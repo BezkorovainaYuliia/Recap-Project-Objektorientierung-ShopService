@@ -1,5 +1,5 @@
 public enum Status {
-    PROCESSING("Progressing"),
+    PROCESSING("Processing"),
     IN_DELIVERY("In delivery"),
     COMPLETED("Completed");
     private final String value;
