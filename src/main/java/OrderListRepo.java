@@ -30,4 +30,12 @@ public class OrderListRepo implements OrderRepo{
             }
         }
     }
+
+    @Override
+    public void updateOrder(Order updatOrder) {
+        removeOrder(updatOrder.id());
+        addOrder(updatOrder);
+    }
+
+
 }

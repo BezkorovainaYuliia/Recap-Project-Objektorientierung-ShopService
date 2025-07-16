@@ -34,4 +34,10 @@ public class ShopService {
         }
         return ordersByStatus;
     }
+
+    public void updateOrder(String id, Status status) {
+        Order updatOrder = orderRepo.getOrderById(id);
+        updatOrder = updatOrder.withStatus(status);
+        orderRepo.updateOrder(updatOrder);
+    }
 }
