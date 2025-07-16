@@ -57,7 +57,7 @@ public class ShopService {
         orderRepo.updateOrder(updatOrder);
     }
 
-    public Map<Status,Order> getOldestOrderPerStatus() {
+    public Map<Status,Order> getOldestOrderPerStatus(){
         return orderRepo.getOrders().stream()
                 .collect(Collectors.toMap(
                         Order::status,
